@@ -1,1 +1,17 @@
-
+name: Unzip File
+on: [push]
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Unzip File
+        run: unzip file.zip -d extracted_files
+      - name: Commit Changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add extracted_files
+          git commit -m "Extracted ZIP file"
+          git push
